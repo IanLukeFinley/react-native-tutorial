@@ -1,35 +1,34 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, TextInput } from 'react-native';
 import React, {useState} from 'react';
 
 export default function App() {
 
 const [name, setName] = useState("Ian");
-const [enemy, setEnemy] = useState({ name: 'Mario', age: 40})
-
-const nameHandler = () => {
-  name === "Ian" ? setName("Ethan") : setName("Ian");
-}
-
-const enemyHandler = () => {
-  enemy.name === "Mario" ? setEnemy({ name: 'Luigi', age: 42}) : setEnemy({ name: 'Mario', age: 40});
-}
+const [age, setAge] = useState(40)
 
 
   return (
     <View style={styles.container}>
-      <View style={styles.buttonContainer}>
-        <Button title='Update Name' onPress={nameHandler} />
-      </View>
+        <Text>Enter name:</Text>
+        <TextInput 
+          multiline
+          style={styles.input} 
+          placeholder="e.g. John Doe"
+          onChangeText = {(value) => setName(value)}
+        />
+        <Text>Enter age:</Text>
+        <TextInput 
+          keyboardType='numeric'
+          style={styles.input} 
+          placeholder="e.g. 20"
+          onChangeText = {(value) => setAge(value)}
+        />
       <View style={styles.body}>
-        <Text>This is {name}'s app!</Text>
+        <Text>Name: {name}</Text>
+        <Text>Age: {age}</Text>
       </View>
-      <View style={styles.enemyBody}>
-        <Text>My enemy is {enemy.name}, who is {enemy.age}!</Text>
-      </View>
-      <View style={styles.buttonContainer}>
-        <Button title='Update Enemy' onPress={enemyHandler} />
-      </View>
+
       
 
     </View>
@@ -45,6 +44,13 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     marginTop: 20
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#777',
+    padding: 8,
+    margin: 10,
+    width: 200,
   },
   body: {
     marginTop: 20,
