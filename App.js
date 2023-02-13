@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
 import React, {useState} from 'react';
 
 export default function App() {
@@ -14,6 +14,12 @@ const [people, setPeople] = useState([
   {name: 'seph', id: '7'},
 ]);
 
+const pressHandler = (id) => {
+  console.log(id);
+  setPeople((prevPeople) => {
+    return prevPeople.filter( person => person.id != id)
+  })
+}
 
 
   return (
@@ -24,16 +30,12 @@ const [people, setPeople] = useState([
         keyExtractor={(item) => item.id}
         data={people}
         renderItem={({item}) => (
+          <TouchableOpacity onPress={() => {pressHandler(item.id)}}>
             <Text style={styles.item}>{item.name}</Text>
+          </TouchableOpacity>
         )}
       />
-      {/* <ScrollView>
-        { people.map( item => 
-            <View key={item.key}>
-              <Text style={styles.item}>{item.name}</Text>
-            </View>
-        )} 
-      </ScrollView> */}
+
     </View>
   );
 }
