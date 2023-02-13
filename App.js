@@ -1,36 +1,30 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput } from 'react-native';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import React, {useState} from 'react';
 
 export default function App() {
 
-const [name, setName] = useState("Ian");
-const [age, setAge] = useState(40)
+const [people, setPeople] = useState([
+  {name: 'ian', key: '1'},
+  {name: 'matt', key: '2'},
+  {name: 'jon', key: '3'},
+  {name: 'george', key: '4'},
+  {name: 'james', key: '5'},
+  {name: 'benjamin', key: '6'},
+  {name: 'seph', key: '7'},
+]);
+
 
 
   return (
     <View style={styles.container}>
-        <Text>Enter name:</Text>
-        <TextInput 
-          multiline
-          style={styles.input} 
-          placeholder="e.g. John Doe"
-          onChangeText = {(value) => setName(value)}
-        />
-        <Text>Enter age:</Text>
-        <TextInput 
-          keyboardType='numeric'
-          style={styles.input} 
-          placeholder="e.g. 20"
-          onChangeText = {(value) => setAge(value)}
-        />
-      <View style={styles.body}>
-        <Text>Name: {name}</Text>
-        <Text>Age: {age}</Text>
-      </View>
-
-      
-
+      <ScrollView>
+        { people.map( item => 
+            <View key={item.key}>
+              <Text style={styles.item}>{item.name}</Text>
+            </View>
+        )} 
+      </ScrollView>
     </View>
   );
 }
@@ -39,31 +33,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    paddingTop: 40,
+    paddingHorizontal: 20
+    //alignItems: 'center',
+    //justifyContent: 'center',
   },
-  buttonContainer: {
-    marginTop: 20
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#777',
-    padding: 8,
-    margin: 10,
-    width: 200,
-  },
-  body: {
-    marginTop: 20,
-    backgroundColor: 'yellow',
-    padding: 20,
-  },
-  enemyBody: {
-    marginTop: 20,
-    backgroundColor: 'red',
-    padding: 20,
-  },
-  boldText: {
-    fontWeight: "bold",
-  },
+  item: {
+    marginTop: 30,
+    padding: 30,
+    backgroundColor: "pink",
+    fontSize: 34,
+  }
+ 
 
 });
