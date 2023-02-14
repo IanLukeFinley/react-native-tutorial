@@ -35,7 +35,6 @@ export default function App() {
   }
 
   return (
-
     //<Sandbox />
     <TouchableWithoutFeedback onPress={() => {
       console.log('Dismiss Keyboard');
