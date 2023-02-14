@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, FlatList } from 'react-native';
 import React, {useState} from 'react';
 import Header from './Components/Header';
 import TodoItem from './Components/TodoItem';
+import TodoForm from './Components/TodoForm'
 
 export default function App() {
 
@@ -18,11 +19,17 @@ export default function App() {
     })
   }
 
+  const submitHandler = (text) => {
+    setTodos((prevTodos) => {
+      return [...prevTodos, {text: text, key: Math.random().toString() }]
+    })
+  }
+
   return (
     <View style={styles.container}>
       <Header />
       <View style={styles.content}>
-        {/*to form */}
+          <TodoForm submitHandler={submitHandler} />
         <View style={styles.list}>
           <FlatList 
             data = {todos}
